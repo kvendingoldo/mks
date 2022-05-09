@@ -2,8 +2,8 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
-use AppBundle\Entity\BaseEntityInterface;
-use AppBundle\Entity\Position;
+use App\Entity\BaseEntityInterface;
+use App\Entity\Position;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
@@ -345,11 +345,11 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Add viewedNotice
      *
-     * @param \AppBundle\Entity\Notice $viewedNotice
+     * @param \App\Entity\Notice $viewedNotice
      *
      * @return User
      */
-    public function addViewedNotice(\AppBundle\Entity\Notice $viewedNotice)
+    public function addViewedNotice(\App\Entity\Notice $viewedNotice)
     {
         $this->viewedNotices[] = $viewedNotice;
 
@@ -359,9 +359,9 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Remove viewedNotice
      *
-     * @param \AppBundle\Entity\Notice $viewedNotice
+     * @param \App\Entity\Notice $viewedNotice
      */
-    public function removeViewedNotice(\AppBundle\Entity\Notice $viewedNotice)
+    public function removeViewedNotice(\App\Entity\Notice $viewedNotice)
     {
         $this->viewedNotices->removeElement($viewedNotice);
     }
@@ -379,11 +379,11 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Add viewedClient
      *
-     * @param \AppBundle\Entity\ViewedClient $viewedClient
+     * @param \App\Entity\ViewedClient $viewedClient
      *
      * @return User
      */
-    public function addViewedClient(\AppBundle\Entity\ViewedClient $viewedClient)
+    public function addViewedClient(\App\Entity\ViewedClient $viewedClient)
     {
         $this->viewedClients[] = $viewedClient;
 
@@ -393,9 +393,9 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Remove viewedClient
      *
-     * @param \AppBundle\Entity\ViewedClient $viewedClient
+     * @param \App\Entity\ViewedClient $viewedClient
      */
-    public function removeViewedClient(\AppBundle\Entity\ViewedClient $viewedClient)
+    public function removeViewedClient(\App\Entity\ViewedClient $viewedClient)
     {
         $this->viewedClients->removeElement($viewedClient);
     }

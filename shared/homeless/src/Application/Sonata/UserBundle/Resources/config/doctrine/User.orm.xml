@@ -18,17 +18,17 @@
         <field name="passport" type="text" nullable="true"/>
         <field name="positionText" type="text" nullable="true"/>
 
-        <one-to-many target-entity="AppBundle\Entity\ViewedClient" field="viewedClients" mapped-by="createdBy">
+        <one-to-many target-entity="App\Entity\ViewedClient" field="viewedClients" mapped-by="createdBy">
             <order-by>
                 <order-by-field name="createdAt" direction="DESC"/>
             </order-by>
         </one-to-many>
 
-        <many-to-one target-entity="AppBundle\Entity\Position" field="position" inversed-by="users"/>
+        <many-to-one target-entity="App\Entity\Position" field="position" inversed-by="users"/>
         <many-to-one target-entity="Application\Sonata\UserBundle\Entity\User" field="createdBy"/>
         <many-to-one target-entity="Application\Sonata\UserBundle\Entity\User" field="updatedBy"/>
 
-        <many-to-many target-entity="AppBundle\Entity\Notice" field="viewedNotices" inversed-by="viewedBy">
+        <many-to-many target-entity="App\Entity\Notice" field="viewedNotices" inversed-by="viewedBy">
             <join-table name="notice_user">
                 <join-columns>
                     <join-column name="user_id" referenced-column-name="id"/>

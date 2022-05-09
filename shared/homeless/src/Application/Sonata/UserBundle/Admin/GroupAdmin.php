@@ -11,7 +11,7 @@
 
 namespace Application\Sonata\UserBundle\Admin;
 
-use AppBundle\Admin\BaseAdminTrait;
+use App\Admin\BaseAdminTrait;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\UserBundle\Admin\Entity\GroupAdmin as BaseGroupAdmin;
 

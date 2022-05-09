@@ -2,7 +2,7 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
-use AppBundle\Entity\BaseEntityInterface;
+use App\Entity\BaseEntityInterface;
 use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
 
 /**

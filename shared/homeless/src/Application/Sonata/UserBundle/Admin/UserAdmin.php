@@ -2,8 +2,8 @@
 
 namespace Application\Sonata\UserBundle\Admin;
 
-use AppBundle\Admin\BaseAdminTrait;
-use AppBundle\Entity\Position;
+use App\Admin\BaseAdminTrait;
+use App\Entity\Position;
 use Application\Sonata\UserBundle\Entity\User;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
