@@ -14,7 +14,6 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.4",
-        "symfony/symfony": "3.4.49",
         "symfony/swiftmailer-bundle": "^3.0",
         "symfony/monolog-bundle": "^3.0",
         "symfony/cache": "^3.2",
@@ -75,7 +74,8 @@
             "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrapSass"
         ],
         "auto-scripts": {
-            "security-checker security:check": "script"
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
     },
     "config": {
