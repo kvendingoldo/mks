@@ -22,7 +22,6 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/migrations": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^2.0",
-        "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.0",
         "incenteev/composer-parameter-handler": "^2.1",
         "sonata-project/core-bundle": "^3.1",
@@ -51,7 +50,8 @@
         "bongrun/lowrapper": "1.0.5",
         "phpoffice/phpexcel": "^1.8",
         "laminas/laminas-zendframework-bridge": "^1.5",
-        "symfony/webpack-encore-bundle": "^1.8"
+        "symfony/webpack-encore-bundle": "^1.8",
+        "symfony/flex": "^1.18"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.1",
@@ -68,25 +68,21 @@
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
             "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrapSass"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
             "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrapSass"
-        ]
+        ],
+        "auto-scripts": {
+            "security-checker security:check": "script"
+        }
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "extra": {
         "symfony-app-dir": "app",
