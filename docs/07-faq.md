@@ -27,5 +27,5 @@
 
 # ... и выполнить команду для смены пароля администратора
 
-./app/console fos:user:change-password admin
+./bin/console fos:user:change-password admin
 ```

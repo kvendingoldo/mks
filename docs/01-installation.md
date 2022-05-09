@@ -120,11 +120,11 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 9. Запустите миграцию для создания первоначальной структуры базы данных и заполнения данными: 
 
-    > ./app/console doctrine:migrations:migrate
+    > ./bin/console doctrine:migrations:migrate
 
 10. При желании можете поменять пароль для входа в систему
 
-    > ./app/console fos:user:change-password admin
+    > ./bin/console fos:user:change-password admin
 
 11. С помощью yarn установите необходимые библиотеки для js 
 
@@ -132,11 +132,11 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 13. Сгенерируйте необходимые assets:
 
-    > ./app/console fos:js-routing:dump
+    > ./bin/console fos:js-routing:dump
     
-    > ./app/console ckeditor:install
+    > ./bin/console ckeditor:install
 
-    > ./app/console assets:install --symlink
+    > ./bin/console assets:install --symlink
     
     > yarn encore prod
 

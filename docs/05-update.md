@@ -47,15 +47,15 @@
 
 9.  Запустить миграцию базы данных для добавления изменений в структуре: 
 
-    > ./app/console doctrine:migrations:migrate
+    > ./bin/console doctrine:migrations:migrate
 
 10. Сгенерировать необходимые assets:
 
-    > ./app/console fos:js-routing:dump
+    > ./bin/console fos:js-routing:dump
 
-    > ./app/console assets:install
+    > ./bin/console assets:install
     
-    > ./app/console assetic:dump --symlink
+    > ./bin/console assetic:dump --symlink
 
 11. После этого проверить, что МКС доступен через браузер и там есть все данные, которые были до обновления системы.
 
