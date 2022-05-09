@@ -379,6 +379,18 @@
     "swiftmailer/swiftmailer": {
         "version": "v6.3.0"
     },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "9d254a22efca7264203eea98b866f16f944b2f09"
+        },
+        "files": [
+            "public/.htaccess"
+        ]
+    },
     "symfony/asset": {
         "version": "v4.4.40"
     },
@@ -418,6 +430,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v3.4.47"
+    },
+    "symfony/dotenv": {
+        "version": "v5.4.5"
     },
     "symfony/error-handler": {
         "version": "v4.4.41"
