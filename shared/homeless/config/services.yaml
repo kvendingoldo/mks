@@ -1,30 +1,360 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-
 services:
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false       # Allows optimizing the container by removing unused services; this also means
-                            # fetching services directly from the container via $container->get() won't work.
-                            # The best practice is to be explicit about your dependencies anyway.
-
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    
+    app.base_entity.subscriber:
+        class: App\EventSubscriber\BaseEntitySubscriber
+        arguments:
+            - '@security.token_storage'
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+    
+    app.contract.listener:
+        class: App\EventListener\ContractListener
+        tags:
+            - { name: doctrine.event_listener, event: postPersist}
+    
+    app.notice.listener:
+        class: App\EventListener\NoticeListener
+        arguments:
+            - '@security.token_storage'
+        tags:
+            - { name: doctrine.event_listener, event: postLoad}
+    
+    app.certificate.listener:
+        class: App\EventListener\CertificateListener
+        tags:
+            - { name: doctrine.event_listener, event: postPersist}
+    
+    app.client.admin:
+        class: App\Admin\ClientAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Клиенты' }
+        arguments: [null, App\Entity\Client, App:CRUD, show_in_dashboard: true]
+        calls:
+            - [addChild, ['@app.note.admin', 'client']]
+            - [addChild, ['@app.service.admin', 'client']]
+            - [addChild, ['@app.document.admin', 'client']]
+            - [addChild, ['@app.document_file.admin', 'client']]
+            - [addChild, ['@app.contract.admin', 'client']]
+            - [addChild, ['@app.shelter_history.admin', 'client']]
+            - [addChild, ['@app.resident_questionnaire.admin', 'client']]
+            - [addChild, ['@app.certificate.admin', 'client']]
+            - [addChild, ['@app.contract.admin', 'client']]
+            - [addChild, ['@app.generated_document.admin', 'client']]
+            - [addChild, ['@app.notice.admin', 'client']]
+            - [addChild, ['@app.history_download.admin', 'client']]
+            - [addChild, ['@app.resident_form_response.admin', 'client']]
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+            - [ setTemplate, ['layout', 'admin/client_show.html.twig']]
+    
+    app.note.admin:
+        class: App\Admin\NoteAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Примечания' }
+        arguments: [null, App\Entity\Note, App:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.history_download.admin:
+        class: App\Admin\HistoryDownloadAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'История скачиваний' }
+        arguments: [~, App\Entity\HistoryDownload, App:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.service.admin:
+        class: App\Admin\ServiceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Услуги' }
+        arguments: [null, App\Entity\Service, App:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.client_field.admin:
+        class: App\Admin\ClientFieldAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Доп. поля клиентов' }
+        arguments: [null, App\Entity\ClientField, SonataAdminBundle:CRUD]
+        calls:
+            - [addChild, ['@app.client_field_option.admin', 'field']]
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.client_field_option.admin:
+        class: App\Admin\ClientFieldOptionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Вариант выбора' }
+        arguments: [null, App\Entity\ClientFieldOption, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.region.admin:
+        class: App\Admin\RegionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Регионы' }
+        arguments: [null, App\Entity\Region, SonataAdminBundle:CRUD]
+        calls:
+            - [addChild, ['@app.district.admin', 'region']]
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.district.admin:
+        class: App\Admin\DistrictAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Районы' }
+        arguments: [null, App\Entity\District, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.document.admin:
+        class: App\Admin\DocumentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Документы' }
+        arguments: [null, App\Entity\Document, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.document_file.admin:
+        class: App\Admin\DocumentFileAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Загруженные файлы' }
+        arguments: [null, App\Entity\DocumentFile, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.contract.admin:
+        class: App\Admin\ContractAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Сервисные планы' }
+        arguments: [null, App\Entity\Contract, App:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.resident_questionnaire.admin:
+        class: App\Admin\ResidentQuestionnaireAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Анкета проживающего' }
+        arguments: [null, App\Entity\ResidentQuestionnaire, App:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.contract_item.admin:
+        class: App\Admin\ContractItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Пункты сервисного плана' }
+        arguments: [null, App\Entity\ContractItem, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.shelter_history.admin:
+        class: App\Admin\ShelterHistoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Проживание в приюте' }
+        arguments: [null, App\Entity\ShelterHistory, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.certificate.admin:
+        class: App\Admin\CertificateAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Справки' }
+        arguments: [null, App\Entity\Certificate, App:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.generated_document.admin:
+        class: App\Admin\GeneratedDocumentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Построить документ' }
+        arguments: [null, App\Entity\GeneratedDocument, App:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.notice.admin:
+        class: App\Admin\NoticeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Напоминания' }
+        arguments: [null, App\Entity\Notice, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+            - [ setTemplate, ['list', '/admin/notice_list.html.twig']]
+    
+    app.service_type.admin:
+        class: App\Admin\ServiceTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Типы услуг' }
+        arguments: [null, App\Entity\ServiceType, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.contract_item_type.admin:
+        class: App\Admin\ContractItemTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Типы пунктов договоров' }
+        arguments: [null, App\Entity\ContractItemType, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.generated_document_type.admin:
+        class: App\Admin\GeneratedDocumentTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Типы постр. док-тов' }
+        arguments: [null, App\Entity\GeneratedDocumentType, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.generated_document_start_text.admin:
+        class: App\Admin\GeneratedDocumentStartTextAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Преамбулы постр. док-тов' }
+        arguments: [null, App\Entity\GeneratedDocumentStartText, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.generated_document_end_text.admin:
+        class: App\Admin\GeneratedDocumentEndTextAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Заключения постр. док-тов' }
+        arguments: [null, App\Entity\GeneratedDocumentEndText, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.certificate_type.admin:
+        class: App\Admin\CertificateTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Типы справок' }
+        arguments: [null, App\Entity\CertificateType, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.menu_item.admin:
+        class: App\Admin\MenuItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Отображение разделов' }
+        arguments: [null, App\Entity\MenuItem, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.position.admin:
+        class: App\Admin\PositionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Должности' }
+        arguments: [null, App\Entity\Position, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.client_form.admin:
+        class: App\Admin\ClientFormAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Редактирование форм' }
+        arguments: [~, App\Entity\ClientForm, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+            - [addChild, ['@app.client_form_field.admin', 'form']]
+    
+    app.client_form_field.admin:
+        class: App\Admin\ClientFormFieldAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'ClientFormField' }
+        arguments: [~, App\Entity\ClientFormField, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.resident_form_response.admin:
+        class: App\Admin\ResidentFormResponseAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Анкета проживающего' }
+        arguments: [~, App\Entity\ClientFormResponse, SonataAdminBundle:CRUD]
+        calls:
+            - [setLabelTranslatorStrategy, ['@sonata.admin.label.strategy.underscore']]
+    
+    app.file_type:
+        class: App\Form\Type\AppFileType
+        tags:
+            - { name: form.type, alias: 'app_file' }
+        calls:
+            - [setStorage, ['@vich_uploader.storage']]
+    
+    app.photo_type:
+        class: App\Form\Type\AppPhotoType
+        tags:
+            - { name: form.type, alias: 'app_photo' }
+    
+    app.contract_duration_type:
+        class: App\Form\Type\AppContractDurationType
+        tags:
+            - { name: form.type, alias: 'app_contract_duration' }
+    
+    app.render_service:
+        class: App\Service\RenderService
+        arguments: ['@templating', '@kernel', '@twig']
+    
+    app.certificate_recreator_service:
+        class: App\Service\CertificateRecreator
+        arguments: ['@doctrine.orm.default_entity_manager']
+        autowire: true
+    
+    app.report_service:
+        class: App\Service\ReportService
+        arguments: ['@doctrine.orm.default_entity_manager']
+        autowire: true
+    
+    app.additional_field_to_array.transformer:
+        class: App\Form\DataTransformer\AdditionalFieldToArrayTransformer
+        arguments: ['@app.client_field_option.repository']
+    
+    app.certificate_type_to_choice_field_mask_type.transformer:
+        class: App\Form\DataTransformer\CertificateTypeToChoiceFieldMaskTypeTransformer
+        arguments: ['@app.certificate_type.repository']
+    
+    app.position_to_choice_field_mask_type.transformer:
+        class: App\Form\DataTransformer\PositionToChoiceFieldMaskTypeTransformer
+        arguments: ['@app.position_option.repository']
+    
+    app.position_option.repository:
+        class: App\Repository\PositionRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments: ['App\Entity\Position']
+    
+    app.client_field_option.repository:
+        class: App\Repository\ClientFieldOptionRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments: ['App\Entity\ClientFieldOption']
+    
+    app.certificate_type.repository:
+        class: App\Repository\CertificateTypeRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments: ['App\Entity\CertificateType']
+    
+    app.service_type.repository:
+        class: App\Repository\ServiceTypeRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments: ['App\Entity\ServiceType']
+    
+    app.service_type_to_choice_field_mask_type.transformer:
+        class: App\Form\DataTransformer\ServiceTypeToChoiceFieldMaskTypeTransformer
+        arguments: ['@app.service_type.repository']
+    
+    app.docx_naming_service:
+        class: App\Service\DOCXNamingService
+    app.pdf_naming_service:
+        class: App\Service\PDFNamingService
+    
+    app.client_form_response.repository:
+        class: App\Repository\ClientFormResponseRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments: ['App\Entity\ClientFormResponse']
+    
+    app.client_form.repository:
+        class: App\Repository\ClientFormRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments: ['App\Entity\ClientForm']
+    
+    app.resident_questionnaire_converter:
+        class: App\Service\ResidentQuestionnaireConverter
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@app.client_form_response.repository'
+            - '@app.client_form.repository'
+    
+    app.meta_service:
+        class: App\Service\MetaService
+        arguments: ['@doctrine.orm.entity_manager']
