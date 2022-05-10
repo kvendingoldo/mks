@@ -2,9 +2,6 @@ framework:
     #esi:             ~
     translator:      { fallbacks: ["ru"] }
     secret:          "env(APP_SECRET)"
-    router:
-        resource: "%kernel.root_dir%/config/routing/routing.yml"
-        strict_requirements: ~
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
@@ -22,5 +19,3 @@ framework:
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
     http_method_override: true
-    assets:
-        version: 'v2'
