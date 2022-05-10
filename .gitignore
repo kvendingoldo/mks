@@ -2,7 +2,7 @@
 shared/logs/
 shared/mysql
 shared/homeless/web/images/
-.env
+/.env
 docker-compose.yml
 backup/
 shared/homeless/.bash_history
