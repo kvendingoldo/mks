@@ -74,22 +74,6 @@ swiftmailer:
         type: file
         path: '%kernel.root_dir%/spool'
 
-fos_user:
-    db_driver:      orm # can be orm or odm
-    firewall_name:  main
-    user_class:     Application\Sonata\UserBundle\Entity\User
-    from_email:
-        address:       webmaster@example.com
-        sender_name:   webmaster
-
-    group:
-        group_class:   Application\Sonata\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
-
-    service:
-        user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
-        mailer: fos_user.mailer.twig_swift
-
 sonata_admin:
     title:      ' '
     title_logo: /render/logo.png
