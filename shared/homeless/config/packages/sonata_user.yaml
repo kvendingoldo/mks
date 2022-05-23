@@ -1,0 +1,21 @@
+sonata_user:
+  security_acl: false
+  manager_type: orm # can be orm or mongodb
+  class:
+    user: App\Sonata\UserBundle\Entity\User
+    group: App\Sonata\UserBundle\Entity\Group
+  #    profile:
+  #        menu:
+  #            - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
+  #            - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle'}
+  admin:                  # Admin Classes
+    user:
+      class:          App\Sonata\UserBundle\Admin\UserAdmin
+      controller:     SonataAdminBundle:CRUD
+      translation:    SonataUserBundle
+    group:
+      class:          App\Sonata\UserBundle\Admin\GroupAdmin
+      controller:     SonataAdminBundle:CRUD
+      translation:    SonataUserBundle
+  impersonating:
+    route: sonata_admin_dashboard

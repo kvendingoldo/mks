@@ -3,7 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\Notice;
-use Application\Sonata\UserBundle\Entity\User;
+use App\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

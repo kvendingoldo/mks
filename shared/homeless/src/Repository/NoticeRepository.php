@@ -10,7 +10,7 @@ use App\Entity\Notice;
 use App\Entity\ResidentQuestionnaire;
 use App\Entity\ShelterHistory;
 use App\Entity\ShelterStatus;
-use Application\Sonata\UserBundle\Entity\User;
+use App\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 

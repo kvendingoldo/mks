@@ -5,12 +5,16 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.4",
+        "symfony/http-kernel": "^3.4",
+        "symfony/config": "^3.4",
         "symfony/asset": "^3.4",
         "symfony/console": "^3.4",
-        "symfony/dotenv": "^3.4",
+        "symfony/cache": "^3.4",
+        "symfony/framework-bundle": "^3.4",
+        "symfony/dependency-injection": "^3.4",
+        "symfony/templating": "^3.4",
         "symfony/swiftmailer-bundle": "^3.0",
         "symfony/monolog-bundle": "^3.0",
-        "symfony/cache": "^3.2",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/migrations": "^2.0",
@@ -45,7 +49,8 @@
         "laminas/laminas-zendframework-bridge": "^1.5",
         "symfony/webpack-encore-bundle": "^1.8",
         "symfony/flex": "^1.18",
-        "symfony/apache-pack": "^1.0"
+        "symfony/apache-pack": "^1.0",
+        "sonata-project/exporter": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -53,10 +58,12 @@
         }
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.1",
-        "symfony/phpunit-bridge": "^3.2",
-        "doctrine/doctrine-fixtures-bundle": "^2.3",
-        "doctrine/data-fixtures": "^1.2"
+        "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^3.4",
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "doctrine/data-fixtures": "^1.2",
+        "symfony/debug": "^3.4",
+        "symfony/dotenv": "^3.4"
     },
     "repositories": [
         {
@@ -75,7 +82,8 @@
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "ckeditor:install": "symfony-cmd"
         }
     },
     "config": {
@@ -87,9 +95,6 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
-        "symfony-assets-install": "relative",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        }
+        "symfony-assets-install": "relative"
     }
 }

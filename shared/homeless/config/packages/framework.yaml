@@ -1,7 +1,7 @@
 framework:
     #esi:             ~
     translator:      { fallbacks: ["ru"] }
-    secret:          "env(APP_SECRET)"
+    secret:          "%env(APP_SECRET)%"
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }

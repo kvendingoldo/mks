@@ -10,7 +10,7 @@ use App\Entity\GeneratedDocument;
 use App\Entity\HistoryDownload;
 use App\Entity\ViewedClient;
 use App\Service\DownloadableInterface;
-use Application\Sonata\UserBundle\Entity\User;
+use App\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Mnvx\Lowrapper\Converter;
 use Mnvx\Lowrapper\DocumentType;

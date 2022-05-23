@@ -153,7 +153,7 @@ class ServiceAdmin extends BaseAdmin
                         return $er->createQueryBuilder('u')
                             ->orderBy("CONCAT(u.lastname,' ',u.firstname,' ',u.middlename)", 'ASC');
                     },
-                    'class' => 'Application\Sonata\UserBundle\Entity\User',
+                    'class' => 'App\Sonata\UserBundle\Entity\User',
                 ]
             ])
             ->add('type', null, [

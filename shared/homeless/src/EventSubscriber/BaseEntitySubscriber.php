@@ -3,7 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\BaseEntityInterface;
-use Application\Sonata\UserBundle\Entity\User;
+use App\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;

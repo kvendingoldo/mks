@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Application\Sonata\UserBundle\Entity\User;
+use App\Sonata\UserBundle\Entity\User;
 
 interface BaseEntityInterface
 {

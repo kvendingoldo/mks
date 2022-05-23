@@ -56,6 +56,18 @@
     "doctrine/doctrine-cache-bundle": {
         "version": "1.4.0"
     },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
+        ]
+    },
     "doctrine/doctrine-migrations-bundle": {
         "version": "2.2",
         "recipe": {
@@ -95,6 +107,9 @@
     },
     "egulias/email-validator": {
         "version": "3.1.2"
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.12"
     },
     "friendsofsymfony/jsrouting-bundle": {
         "version": "2.8",
@@ -225,8 +240,8 @@
     "mopa/composer-bridge": {
         "version": "v1.5.0"
     },
-    "ocramius/proxy-manager": {
-        "version": "2.13.1"
+    "nikic/php-parser": {
+        "version": "v4.13.2"
     },
     "paragonie/random_compat": {
         "version": "v2.0.21"
@@ -266,9 +281,6 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
-    },
-    "sensio/generator-bundle": {
-        "version": "v3.1.7"
     },
     "sonata-project/admin-bundle": {
         "version": "3.57",
@@ -434,9 +446,6 @@
     "symfony/dotenv": {
         "version": "v5.4.5"
     },
-    "symfony/error-handler": {
-        "version": "v4.4.41"
-    },
     "symfony/event-dispatcher": {
         "version": "v4.4.37"
     },
@@ -486,9 +495,6 @@
             "src/Kernel.php"
         ]
     },
-    "symfony/http-client-contracts": {
-        "version": "v2.5.1"
-    },
     "symfony/http-foundation": {
         "version": "v4.4.41"
     },
@@ -500,6 +506,15 @@
     },
     "symfony/intl": {
         "version": "v4.4.41"
+    },
+    "symfony/maker-bundle": {
+        "version": "1.29",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
     },
     "symfony/mime": {
         "version": "v5.4.8"
@@ -564,19 +579,16 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.25.0"
     },
+    "symfony/polyfill-php56": {
+        "version": "v1.20.0"
+    },
     "symfony/polyfill-php70": {
         "version": "v1.20.0"
     },
     "symfony/polyfill-php72": {
         "version": "v1.25.0"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.25.0"
-    },
     "symfony/polyfill-php80": {
-        "version": "v1.25.0"
-    },
-    "symfony/polyfill-php81": {
         "version": "v1.25.0"
     },
     "symfony/process": {
@@ -660,7 +672,7 @@
         ]
     },
     "symfony/translation-contracts": {
-        "version": "v2.5.1"
+        "version": "v1.1.12"
     },
     "symfony/twig-bridge": {
         "version": "v4.2.12"
@@ -692,9 +704,6 @@
             "config/packages/test/validator.yaml",
             "config/packages/validator.yaml"
         ]
-    },
-    "symfony/var-dumper": {
-        "version": "v4.4.41"
     },
     "symfony/webpack-encore-bundle": {
         "version": "1.8",
@@ -750,9 +759,6 @@
         "files": [
             "config/packages/vich_uploader.yaml"
         ]
-    },
-    "webimpress/safe-writer": {
-        "version": "2.2.0"
     },
     "willdurand/faker-bundle": {
         "version": "1.4.1"

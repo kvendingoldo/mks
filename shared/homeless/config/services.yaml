@@ -289,7 +289,7 @@ services:
     
     app.certificate_recreator_service:
         class: App\Service\CertificateRecreator
-        arguments: ['@doctrine.orm.default_entity_manager']
+        arguments: ['@doctrine.orm.default_entity_manager', 'app.certificate_type.repository']
         autowire: true
     
     app.report_service:

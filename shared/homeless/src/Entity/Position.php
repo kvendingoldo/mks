@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Application\Sonata\UserBundle\Entity\User;
+use App\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,7 +20,7 @@ class Position extends BaseEntity
 
     /**
      * Пользователи с данной должностью
-     * @ORM\OneToMany(targetEntity="Application\Sonata\UserBundle\Entity\User", mappedBy="position")
+     * @ORM\OneToMany(targetEntity="App\Sonata\UserBundle\Entity\User", mappedBy="position")
      */
     private $users;
 
@@ -56,7 +56,7 @@ class Position extends BaseEntity
     /**
      * Add user
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $user
+     * @param \App\Sonata\UserBundle\Entity\User $user
      *
      * @return Position
      */
@@ -70,7 +70,7 @@ class Position extends BaseEntity
     /**
      * Remove user
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $user
+     * @param \App\Sonata\UserBundle\Entity\User $user
      */
     public function removeUser(User $user)
     {

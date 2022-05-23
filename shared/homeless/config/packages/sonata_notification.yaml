@@ -1,5 +1,23 @@
 sonata_notification:
-    consumers:
-        register_default: false
     admin:
         enabled: false
+
+    # Other backends you can use:
+    #
+    # sonata.notification.backend.postpone
+    # sonata.notification.backend.doctrine
+    # sonata.notification.backend.rabbitmq
+    backend: sonata.notification.backend.runtime
+    backends:
+        rabbitmq:
+            exchange: alarm # Required
+            connection:
+                host:                 localhost
+                port:                 5672
+                user:                 guest
+                pass:                 guest
+                vhost:                guest
+                console_url:          'http://localhost:55672/api'
+    consumers:
+        # If set to true, SwiftMailerConsumer and LoggerConsumer will be registered as services
+        register_default:     true

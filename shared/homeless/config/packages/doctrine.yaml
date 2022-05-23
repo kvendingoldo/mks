@@ -1,22 +1,31 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
+        host:     "%env(DB_HOST)%"
+        port:     "%env(DB_PORT)%"
+        dbname:   "%env(DB_NAME)%"
+        user:     "%env(DB_USER)%"
+        password: "%env(DB_PASSWORD)%"
+        driver:   pdo_mysql
+        charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
 
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '13'
-
-        # only needed for MySQL
-        charset: utf8mb4
-        default_table_options:
-            collate: utf8mb4_unicode_ci
-
-        # backtrace queries in profiler (increases memory usage per request)
-        #profiling_collect_backtrace: '%kernel.debug%'
     orm:
-        auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_generate_proxy_classes: true #"%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        #        metadata_cache_driver: apc
+        #        query_cache_driver: apc
+        #        result_cache_driver: apc
+        dql:
+            string_functions:
+                custom_part: App\DoctrineExtensions\Query\Mysql\CustomPart
         mappings:
             App:
                 is_bundle: false

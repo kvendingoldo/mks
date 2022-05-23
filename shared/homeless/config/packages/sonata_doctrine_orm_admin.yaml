@@ -1,0 +1,3 @@
+sonata_doctrine_orm_admin:
+  templates:
+    form: [ AppBundle:Admin:form_admin_fields.html.twig ]

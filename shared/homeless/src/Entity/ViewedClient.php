@@ -18,7 +18,7 @@ class ViewedClient extends BaseEntity
 
     /**
      * Кем создано
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="viewedClients")
+     * @ORM\ManyToOne(targetEntity="App\Sonata\UserBundle\Entity\User", inversedBy="viewedClients")
      */
     protected $createdBy;
 

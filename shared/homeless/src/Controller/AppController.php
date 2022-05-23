@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ClientField;
 use App\Entity\ContractStatus;
-use Application\Sonata\UserBundle\Entity\User;
+use App\Sonata\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

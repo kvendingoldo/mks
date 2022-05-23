@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Application\Sonata\UserBundle\Entity\User;
+use App\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,7 +32,7 @@ class Notice extends BaseEntity
 
     /**
      * Кем просмотрено
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\UserBundle\Entity\User", mappedBy="viewedNotices")
+     * @ORM\ManyToMany(targetEntity="App\Sonata\UserBundle\Entity\User", mappedBy="viewedNotices")
      */
     private $viewedBy;
 
@@ -142,7 +142,7 @@ class Notice extends BaseEntity
     /**
      * Add viewedBy
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $viewedBy
+     * @param \App\Sonata\UserBundle\Entity\User $viewedBy
      *
      * @return Notice
      */
@@ -157,7 +157,7 @@ class Notice extends BaseEntity
     /**
      * Remove viewedBy
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $viewedBy
+     * @param \App\Sonata\UserBundle\Entity\User $viewedBy
      */
     public function removeViewedBy(User $viewedBy)
     {

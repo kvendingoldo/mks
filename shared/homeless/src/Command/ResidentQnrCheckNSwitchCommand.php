@@ -6,7 +6,7 @@ namespace App\Command;
 
 use App\Entity\BaseEntity;
 use App\Entity\ResidentQuestionnaire;
-use Application\Sonata\UserBundle\Entity\Group;
+use App\Sonata\UserBundle\Entity\Group;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use Symfony\Component\Console\Input\InputInterface;
