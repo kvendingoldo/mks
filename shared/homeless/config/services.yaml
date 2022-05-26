@@ -358,3 +358,4 @@ services:
     app.meta_service:
         class: App\Service\MetaService
         arguments: ['@doctrine.orm.entity_manager']
+        public: true

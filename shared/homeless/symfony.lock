@@ -1,15 +1,9 @@
 {
-    "behat/transliterator": {
-        "version": "v1.5.0"
-    },
     "bongrun/lowrapper": {
         "version": "1.0.5"
     },
     "cocur/slugify": {
         "version": "v3.2"
-    },
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.5"
     },
     "doctrine/annotations": {
         "version": "1.13",
@@ -52,9 +46,6 @@
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
         ]
-    },
-    "doctrine/doctrine-cache-bundle": {
-        "version": "1.4.0"
     },
     "doctrine/doctrine-fixtures-bundle": {
         "version": "3.2",
@@ -102,14 +93,26 @@
     "doctrine/persistence": {
         "version": "1.3.8"
     },
-    "doctrine/reflection": {
-        "version": "1.2.2"
+    "doctrine/sql-formatter": {
+        "version": "1.1.2"
     },
     "egulias/email-validator": {
         "version": "3.1.2"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.12"
+    },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "f5ad42002183a6881962683e6d84bbb25cdfce5d"
+        },
+        "files": [
+            "config/packages/fos_ckeditor.yaml"
+        ]
     },
     "friendsofsymfony/jsrouting-bundle": {
         "version": "2.8",
@@ -152,9 +155,6 @@
     },
     "incenteev/composer-parameter-handler": {
         "version": "v2.1.4"
-    },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
     },
     "jms/metadata": {
         "version": "2.6.1"
@@ -258,14 +258,17 @@
     "psr/container": {
         "version": "1.1.2"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
     "psr/http-message": {
         "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.1.4"
-    },
-    "psr/simple-cache": {
-        "version": "1.0.1"
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
@@ -329,9 +332,6 @@
     "sonata-project/doctrine-orm-admin-bundle": {
         "version": "3.13.0"
     },
-    "sonata-project/easy-extends-bundle": {
-        "version": "2.5.0"
-    },
     "sonata-project/exporter": {
         "version": "2.8",
         "recipe": {
@@ -359,18 +359,6 @@
             "config/packages/sonata_media.yaml",
             "config/routes/sonata_media.yaml",
             "public/upload/media/.gitignore"
-        ]
-    },
-    "sonata-project/notification-bundle": {
-        "version": "3.6",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "3.4",
-            "ref": "222a1549f627f9faef39c0dd3cba1194a5175c00"
-        },
-        "files": [
-            "config/packages/sonata_notification.yaml"
         ]
     },
     "sonata-project/translation-bundle": {
@@ -409,6 +397,9 @@
     "symfony/cache": {
         "version": "v3.4.47"
     },
+    "symfony/cache-contracts": {
+        "version": "v2.5.1"
+    },
     "symfony/class-loader": {
         "version": "v3.4.47"
     },
@@ -428,9 +419,6 @@
             "config/bootstrap.php"
         ]
     },
-    "symfony/contracts": {
-        "version": "v1.1.0"
-    },
     "symfony/debug": {
         "version": "v4.4.41"
     },
@@ -445,6 +433,9 @@
     },
     "symfony/dotenv": {
         "version": "v5.4.5"
+    },
+    "symfony/error-handler": {
+        "version": "v4.4.41"
     },
     "symfony/event-dispatcher": {
         "version": "v4.4.37"
@@ -494,6 +485,9 @@
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]
+    },
+    "symfony/http-client-contracts": {
+        "version": "v2.5.1"
     },
     "symfony/http-foundation": {
         "version": "v4.4.41"
@@ -555,9 +549,6 @@
             "tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-apcu": {
-        "version": "v1.25.0"
-    },
     "symfony/polyfill-ctype": {
         "version": "v1.25.0"
     },
@@ -565,9 +556,6 @@
         "version": "v1.25.0"
     },
     "symfony/polyfill-intl-grapheme": {
-        "version": "v1.25.0"
-    },
-    "symfony/polyfill-intl-icu": {
         "version": "v1.25.0"
     },
     "symfony/polyfill-intl-idn": {
@@ -579,16 +567,16 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.25.0"
     },
-    "symfony/polyfill-php56": {
-        "version": "v1.20.0"
-    },
-    "symfony/polyfill-php70": {
-        "version": "v1.20.0"
-    },
     "symfony/polyfill-php72": {
         "version": "v1.25.0"
     },
+    "symfony/polyfill-php73": {
+        "version": "v1.25.0"
+    },
     "symfony/polyfill-php80": {
+        "version": "v1.25.0"
+    },
+    "symfony/polyfill-php81": {
         "version": "v1.25.0"
     },
     "symfony/process": {
@@ -611,9 +599,6 @@
             "config/routes.yaml"
         ]
     },
-    "symfony/security": {
-        "version": "v4.4.41"
-    },
     "symfony/security-acl": {
         "version": "v3.1.2"
     },
@@ -628,6 +613,18 @@
         "files": [
             "config/packages/security.yaml"
         ]
+    },
+    "symfony/security-core": {
+        "version": "v4.4.41"
+    },
+    "symfony/security-csrf": {
+        "version": "v4.4.37"
+    },
+    "symfony/security-guard": {
+        "version": "v4.4.37"
+    },
+    "symfony/security-http": {
+        "version": "v4.4.41"
     },
     "symfony/serializer": {
         "version": "v4.4.41"
@@ -705,6 +702,12 @@
             "config/packages/validator.yaml"
         ]
     },
+    "symfony/var-dumper": {
+        "version": "v5.4.8"
+    },
+    "symfony/var-exporter": {
+        "version": "v5.4.8"
+    },
     "symfony/webpack-encore-bundle": {
         "version": "1.8",
         "recipe": {
@@ -745,6 +748,12 @@
             "config/packages/twig_extensions.yaml"
         ]
     },
+    "twig/extra-bundle": {
+        "version": "v3.4.0"
+    },
+    "twig/string-extra": {
+        "version": "v3.4.0"
+    },
     "twig/twig": {
         "version": "v2.14.13"
     },
@@ -768,8 +777,5 @@
     },
     "willdurand/negotiation": {
         "version": "3.1.0"
-    },
-    "zendframework/zenddiagnostics": {
-        "version": "v1.6.0"
     }
 }

@@ -10,7 +10,6 @@ framework:
         engines: ['twig']
     default_locale:  "ru"
     trusted_hosts:   ~
-    trusted_proxies: ~
     session:
         cookie_lifetime: 605080
         gc_maxlifetime: 252000
