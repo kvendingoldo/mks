@@ -5,15 +5,15 @@ namespace App\Controller;
 use App\Entity\ClientField;
 use App\Entity\ContractStatus;
 use App\Entity\User;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/app")
  */
-class AppController extends Controller
+class AppController extends AbstractController
 {
 
     /**
@@ -22,7 +22,7 @@ class AppController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function myClientsAction(Request $request)
+    public function myClientsAction(Request $request): Response
     {
         $user = $this->getUser();
 
@@ -34,7 +34,6 @@ class AppController extends Controller
 
         $inProcessStatus = $this
             ->getDoctrine()
-            ->getEntityManager()
             ->getRepository('App:ContractStatus')
             ->findOneBy(['syncId' => ContractStatus::IN_PROCESS]);
 
@@ -63,7 +62,6 @@ class AppController extends Controller
 
         $statuses = $this
             ->getDoctrine()
-            ->getEntityManager()
             ->getRepository('App:ContractStatus')
             ->findAll();
 
@@ -183,7 +181,7 @@ class AppController extends Controller
         $optionsBreadwinner = $fieldHomelessBreadwinner ? $fieldHomelessBreadwinner->getOptionsArray() : [];
 
         return $this->render('@App/Admin/report.html.twig', [
-            'users' => $this->getDoctrine()->getEntityManager()->getRepository('ApplicationSonataUserBundle:User')->findBy([
+            'users' => $this->getDoctrine()->getRepository('ApplicationSonataUserBundle:User')->findBy([
                 'enabled' => true,
             ]),
             'types' => $report->getTypes(),

@@ -6,6 +6,7 @@ use App\Entity\DocumentType;
 use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class DocumentAdmin extends BaseAdmin
 {
@@ -22,7 +23,7 @@ class DocumentAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('type', 'entity', [
+            ->add('type', EntityType::class, [
                 'label' => 'Тип',
                 'required' => true,
                 'class' => 'App\Entity\DocumentType',

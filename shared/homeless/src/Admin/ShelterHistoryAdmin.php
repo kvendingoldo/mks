@@ -21,7 +21,7 @@ class ShelterHistoryAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('status', 'entity', [
+            ->add('status', EntityType::class, [
                 'label' => 'Статус',
                 'required' => true,
                 'class' => 'App\Entity\ShelterStatus',
@@ -30,7 +30,7 @@ class ShelterHistoryAdmin extends BaseAdmin
                         ->orderBy('s.sort', 'ASC');
                 },
             ])
-            ->add('contract', 'entity', [
+            ->add('contract', EntityType::class, [
                 'label' => 'Договор',
                 'required' => true,
                 'class' => 'App\Entity\Contract',
@@ -41,7 +41,7 @@ class ShelterHistoryAdmin extends BaseAdmin
                         ->setParameter('client', $this->getParent()->getSubject());
                 },
             ])
-            ->add('room', 'entity', [
+            ->add('room', EntityType::class, [
                 'label' => 'Комната',
                 'required' => false,
                 'class' => 'App\Entity\ShelterRoom',

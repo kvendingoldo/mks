@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ContractAdmin extends BaseAdmin
 {
@@ -44,7 +45,7 @@ class ContractAdmin extends BaseAdmin
         }
 
         $formMapper
-            ->add('status', 'entity', [
+            ->add('status', EntityType::class, [
                 'label' => 'Статус',
                 'required' => true,
                 'class' => 'App\Entity\ContractStatus',

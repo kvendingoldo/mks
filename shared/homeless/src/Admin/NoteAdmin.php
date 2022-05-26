@@ -5,6 +5,7 @@ namespace App\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class NoteAdmin extends BaseAdmin
 {
@@ -21,7 +22,7 @@ class NoteAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('text', SimpleFormatterType::class, [
+            ->add(TextType::class, SimpleFormatterType::class, [
                 'label' => 'Текст',
                 'required' => true,
                 'format' => 'richhtml',
@@ -45,7 +46,7 @@ class NoteAdmin extends BaseAdmin
             ->add('createdAt', 'date', [
                 'label' => 'Когда добавлено',
             ])
-            ->add('text', null, [
+            ->add(TextType::class, null, [
                 'label' => 'Текст',
                 'template' => '/admin/fields/note_text_list.html.twig',
             ])

@@ -35,7 +35,7 @@ class User extends BaseUser implements BaseEntityInterface
      * Поле в старой БД: middlename
      * @ORM\Column(type="string", nullable=true)
      */
-    private string $middlename;
+    private ?string $middlename;
 
     /**
      * Дата доверенности
@@ -274,9 +274,8 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Get middlename
      *
-     * @return string
      */
-    public function getMiddlename(): string
+    public function getMiddlename(): ?string
     {
         return $this->middlename;
     }

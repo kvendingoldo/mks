@@ -4,13 +4,14 @@ namespace App\Admin;
 
 use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ContractItemAdmin extends BaseAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('type', 'entity', [
+            ->add('type', EntityType::class, [
                 'label' => 'Тип',
                 'required' => true,
                 'class' => 'App\Entity\ContractItemType',

@@ -4,6 +4,7 @@ namespace App\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ServiceTypeAdmin extends BaseAdmin
 {
@@ -24,7 +25,7 @@ class ServiceTypeAdmin extends BaseAdmin
                 'label' => 'Название',
                 'required' => true,
             ])
-            ->add('sort', 'text', [
+            ->add('sort', TextType::class, [
                 'label' => 'Сортировка',
                 'required' => true,
             ])
@@ -47,7 +48,7 @@ class ServiceTypeAdmin extends BaseAdmin
             ->addIdentifier('name', null, [
                 'label' => 'Название',
             ])
-            ->add('sort', 'text', [
+            ->add('sort', TextType::class, [
                 'label' => 'Сортировка',
             ])
             ->add('comment', 'boolean', [

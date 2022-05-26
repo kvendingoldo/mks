@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Дополнительное поле клиента
@@ -127,7 +129,7 @@ class ClientField extends BaseEntity
         }
 
         if ($this->type == self::TYPE_FILE) {
-            return 'text';
+            return TextType::class;
         }
 
         if ($this->type == self::TYPE_OPTION) {
@@ -160,7 +162,7 @@ class ClientField extends BaseEntity
         }
 
         if ($this->type == self::TYPE_OPTION) {
-            return 'entity';
+            return EntityType::class;
         }
 
         return null;

@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -92,7 +93,7 @@ class CertificateAdmin extends BaseAdmin
                 'label' => 'Город следования *',
                 'required' => false,
             ])
-            ->add('document', 'entity', [
+            ->add('document', EntityType::class, [
                 'label' => 'Основание для выдачи (документ) *',
                 'required' => false,
                 'class' => 'App\Entity\Document',
@@ -119,7 +120,7 @@ class CertificateAdmin extends BaseAdmin
                 'template' =>'/CRUD/list_certificate_type.html.twig',
                 'label' => 'Тип',
             ])
-            ->add('client.documents', 'entity', [
+            ->add('client.documents', EntityType::class, [
                 'label' => 'Доп. поле',
                 'template' =>'/CRUD/list_certificate_addition.html.twig',
                 'class' => 'App\Entity\Document',

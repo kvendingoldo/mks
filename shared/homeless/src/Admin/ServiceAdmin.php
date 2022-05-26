@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ServiceAdmin extends BaseAdmin
 {
@@ -67,13 +68,13 @@ class ServiceAdmin extends BaseAdmin
             $formMapper->add('type', ChoiceFieldMaskType::class, $typeOptions);
             if ($hasTypeWithComment) {
                 $formMapper->
-                add('comment', 'text', [
+                add('comment', TextType::class, [
                     'label' => 'Комментарий',
                     'required' => false,
                 ]);
             }
             if ($hasTypeWithAmount) {
-                $formMapper->add('amount', 'text', [
+                $formMapper->add('amount', TextType::class, [
                     'label' => 'Сумма',
                     'required' => false,
                 ]);

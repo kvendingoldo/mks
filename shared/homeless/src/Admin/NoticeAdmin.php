@@ -7,6 +7,7 @@ use App\Entity\User;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class NoticeAdmin extends BaseAdmin
 {
@@ -23,7 +24,7 @@ class NoticeAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('text', null, [
+            ->add(TextType::class, null, [
                 'label' => 'Текст',
                 'required' => true,
             ])
@@ -45,7 +46,7 @@ class NoticeAdmin extends BaseAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('text', null, [
+            ->addIdentifier(TextType::class, null, [
                 'label' => 'Текст',
                 'route' => ['name' => 'edit'],
             ])
@@ -105,14 +106,14 @@ class NoticeAdmin extends BaseAdmin
             )
             ->add('createdBy', 'doctrine_orm_number', [
                     'label' => 'Кем добавлено',
-                    'field_type' => 'text',
+                    'field_type' => TextType::class,
                     'advanced_filter' => false,
                 ]
             )
             ->add('id', 'doctrine_orm_callback', [
                     'label' => 'id',
                     'callback' => [$this, 'getById'],
-                    'field_type' => 'text',
+                    'field_type' => TextType::class,
                     'advanced_filter' => false,
                 ]
             );

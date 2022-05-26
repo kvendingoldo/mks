@@ -23,7 +23,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -105,7 +107,7 @@ class ClientAdmin extends BaseAdmin
             ->add('fullname', null, [
                 'label' => 'ФИО',
             ])
-            ->add('id', 'text', [
+            ->add('id', TextType::class, [
                 'label' => 'ID',
             ])
             ->add('gender', 'choice', [
@@ -131,7 +133,7 @@ class ClientAdmin extends BaseAdmin
             'label' => 'Дата добавления',
         ]);
         if ($this->isMenuItemEnabled(MenuItem::CODE_SHELTER_HISTORY)) {
-            $showMapper->add('shelterHistories', 'entity', [
+            $showMapper->add('shelterHistories', EntityType::class, [
                 'label' => 'Проживание в приюте',
                 'template' => '/admin/fields/client_shelter_histories_show.html.twig',
             ]);
@@ -594,7 +596,7 @@ class ClientAdmin extends BaseAdmin
             ->add('search', 'doctrine_orm_callback', [
                     'label' => 'Поиск',
                     'callback' => [$this, 'getClientSearchFilter'],
-                    'field_type' => 'text',
+                    'field_type' => TextType::class,
                     'global_search' => true,
                     'advanced_filter' => false,
                 ]
@@ -602,7 +604,7 @@ class ClientAdmin extends BaseAdmin
             ->add('lastName', 'doctrine_orm_callback', [
                     'label' => 'Фамилия',
                     'callback' => [$this, 'getClientSearchLastName'],
-                    'field_type' => 'text',
+                    'field_type' => TextType::class,
                     'global_search' => true,
                     'advanced_filter' => false,
                 ]
@@ -610,7 +612,7 @@ class ClientAdmin extends BaseAdmin
             ->add('firstName', 'doctrine_orm_callback', [
                     'label' => 'Имя',
                     'callback' => [$this, 'getClientSearchFirstName'],
-                    'field_type' => 'text',
+                    'field_type' => TextType::class,
                     'global_search' => true,
                     'advanced_filter' => false,
                 ]
@@ -618,7 +620,7 @@ class ClientAdmin extends BaseAdmin
             ->add('middleName', 'doctrine_orm_callback', [
                     'label' => 'Отчество',
                     'callback' => [$this, 'getClientSearchMiddleName'],
-                    'field_type' => 'text',
+                    'field_type' => TextType::class,
                     'global_search' => true,
                     'advanced_filter' => false,
                 ]
@@ -626,7 +628,7 @@ class ClientAdmin extends BaseAdmin
             ->add('note', 'doctrine_orm_callback', [
                     'label' => 'Примечание',
                     'callback' => [$this, 'getClientSearchNote'],
-                    'field_type' => 'text',
+                    'field_type' => TextType::class,
                     'global_search' => true,
                     'advanced_filter' => false,
                 ]
@@ -634,7 +636,7 @@ class ClientAdmin extends BaseAdmin
             ->add('contract', 'doctrine_orm_callback', [
                     'label' => 'Сервистный план',
                     'callback' => [$this, 'getClientSearchContract'],
-                    'field_type' => 'text',
+                    'field_type' => TextType::class,
                     'global_search' => true,
                     'advanced_filter' => false,
                 ]
@@ -656,7 +658,7 @@ class ClientAdmin extends BaseAdmin
             ->add('contractCreatedBy', 'doctrine_orm_callback', [
                     'label' => 'Кем добавлен договор',
                     'callback' => [$this, 'getContractCreatedByFilter'],
-                    'field_type' => 'entity',
+                    'field_type' => EntityType::class,
                     'field_options' => [
                         'class' => 'App\Entity\User',
                         'choice_label' => 'fullname',
@@ -673,7 +675,7 @@ class ClientAdmin extends BaseAdmin
             ->add('contractStatus', 'doctrine_orm_callback', [
                     'label' => 'Статус договора',
                     'callback' => [$this, 'getContractStatusFilter'],
-                    'field_type' => 'entity',
+                    'field_type' => EntityType::class,
                     'field_options' => [
                         'class' => 'App\Entity\ContractStatus',
                         'choice_label' => 'name',

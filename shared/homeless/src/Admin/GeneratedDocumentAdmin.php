@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class GeneratedDocumentAdmin extends BaseAdmin
 {
@@ -28,7 +30,7 @@ class GeneratedDocumentAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('type', 'entity', [
+            ->add('type', EntityType::class, [
                 'label' => 'Тип',
                 'required' => false,
                 'class' => 'App\Entity\GeneratedDocumentType',
@@ -45,7 +47,7 @@ class GeneratedDocumentAdmin extends BaseAdmin
                 'label' => 'Кому',
                 'required' => false,
             ])
-            ->add('startText', 'entity', [
+            ->add('startText', EntityType::class, [
                 'label' => 'Преамбула',
                 'required' => false,
                 'class' => 'App\Entity\GeneratedDocumentStartText',
@@ -54,11 +56,11 @@ class GeneratedDocumentAdmin extends BaseAdmin
                         ->orderBy('t.name', 'ASC');
                 },
             ])
-            ->add('text', null, [
+            ->add(TextType::class, null, [
                 'label' => 'Основная часть',
                 'required' => false,
             ])
-            ->add('endText', 'entity', [
+            ->add('endText', EntityType::class, [
                 'label' => 'Заключение',
                 'required' => false,
                 'class' => 'App\Entity\GeneratedDocumentEndText',

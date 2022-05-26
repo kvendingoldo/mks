@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -73,7 +74,7 @@ class ClientFormFieldAdmin extends BaseAdmin
                 'label' => 'Обязательное',
                 'required' => false,
             ])
-            ->add('sort', 'text', [
+            ->add('sort', TextType::class, [
                 'label' => 'Сортировка',
                 'required' => true,
             ]);
@@ -116,7 +117,7 @@ class ClientFormFieldAdmin extends BaseAdmin
             ->addIdentifier('name', null, [
                 'label' => 'Название',
             ])
-            ->add('sort', 'text', [
+            ->add('sort', TextType::class, [
                 'label' => 'Сортировка',
             ]);
 
