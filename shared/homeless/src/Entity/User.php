@@ -1,66 +1,102 @@
 <?php
 
-namespace App\Sonata\UserBundle\Entity;
+namespace App\Entity;
 
-use App\Entity\BaseEntityInterface;
-use App\Entity\Position;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
  * Пользователь (сотрудник)
  * Таблица в старой БД: Worker
+ * @ORM\Entity()
+ * @ORM\Table(name="fos_user_user")
  */
 class User extends BaseUser implements BaseEntityInterface
 {
     /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
      * Должность
      * Поле в старой БД: rules
+     * @ORM\ManyToOne(targetEntity="App\Entity\Position", inversedBy="users")
      */
-    private $position;
+    private Position $position;
 
     /**
      * Отчество
      * Поле в старой БД: middlename
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $middlename;
+    private string $middlename;
 
     /**
      * Дата доверенности
      * Поле в старой БД: warrantDate
+     * @ORM\Column(type="date", nullable=true)
      */
-    private $proxyDate;
+    private DateTime $proxyDate;
 
     /**
      * Номер доверенности
      * Поле в старой БД: warrantNum
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $proxyNum;
+    private string $proxyNum;
 
     /**
      * Паспортные данные
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $passport;
+    private string $passport;
 
     /**
      * Просмотренные уведомления
+     * @ORM\ManyToMany(targetEntity="App\Entity\Notice", inversedBy="viewedBy")
+     * @ORM\JoinTable(
+     *     name="notice_user",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="notice_id", referencedColumnName="id", unique=true)}
+     * )
      */
-    private $viewedNotices;
+    private Collection $viewedNotices;
 
     /**
      * Просмотренные анкеты клиентов
+     * @ORM\OneToMany(targetEntity="App\Entity\ViewedClient", mappedBy="createdBy")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
-    private $viewedClients;
+    private Collection $viewedClients;
 
     /**
      * Должность текстом
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $positionText;
+    private string $positionText;
 
-    private $syncId;
-    private $sort;
-    private $createdBy;
-    private $updatedBy;
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private int $syncId;
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private int $sort;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private User $createdBy;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private User $updatedBy;
 
     public function __construct()
     {
@@ -72,20 +108,20 @@ class User extends BaseUser implements BaseEntityInterface
     public function __toString()
     {
         if (empty($this->lastname)) {
-            return (string)$this->firstname;
+            return $this->firstname;
         }
 
         if (empty($this->firstname)) {
-            return (string)$this->lastname;
+            return $this->lastname;
         }
 
-        return (string)($this->lastname . ' ' . $this->getInitials());
+        return $this->lastname . ' ' . $this->getInitials();
     }
 
     /**
      * ФИО
      */
-    public function getFullname()
+    public function getFullname(): string
     {
         $fullname = [];
 
@@ -110,7 +146,7 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Иницииалы
      */
-    public function getInitials()
+    public function getInitials(): string
     {
         $initials = '';
 
@@ -128,11 +164,11 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Set position
      *
-     * @param Position $position
+     * @param Position|null $position
      *
      * @return User
      */
-    public function setPosition(Position $position = null)
+    public function setPosition(Position $position = null): User
     {
         $this->position = $position;
 
@@ -144,7 +180,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return Position
      */
-    public function getPosition()
+    public function getPosition(): Position
     {
         return $this->position;
     }
@@ -156,7 +192,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return User
      */
-    public function setSyncId($syncId)
+    public function setSyncId($syncId): User
     {
         $this->syncId = $syncId;
 
@@ -168,7 +204,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return integer
      */
-    public function getSyncId()
+    public function getSyncId(): int
     {
         return $this->syncId;
     }
@@ -176,11 +212,11 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Set createdBy
      *
-     * @param User $createdBy
+     * @param User|null $createdBy
      *
      * @return User
      */
-    public function setCreatedBy(User $createdBy = null)
+    public function setCreatedBy(User $createdBy = null): User
     {
         $this->createdBy = $createdBy;
 
@@ -192,7 +228,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return User
      */
-    public function getCreatedBy()
+    public function getCreatedBy(): User
     {
         return $this->createdBy;
     }
@@ -200,11 +236,11 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Set updatedBy
      *
-     * @param User $updatedBy
+     * @param User|null $updatedBy
      *
      * @return User
      */
-    public function setUpdatedBy(User $updatedBy = null)
+    public function setUpdatedBy(User $updatedBy = null): User
     {
         $this->updatedBy = $updatedBy;
 
@@ -216,7 +252,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return User
      */
-    public function getUpdatedBy()
+    public function getUpdatedBy(): User
     {
         return $this->updatedBy;
     }
@@ -228,7 +264,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return User
      */
-    public function setMiddlename($middlename)
+    public function setMiddlename(string $middlename): User
     {
         $this->middlename = $middlename;
 
@@ -240,7 +276,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return string
      */
-    public function getMiddlename()
+    public function getMiddlename(): string
     {
         return $this->middlename;
     }
@@ -248,11 +284,11 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Set proxyDate
      *
-     * @param \DateTime $proxyDate
+     * @param DateTime $proxyDate
      *
      * @return User
      */
-    public function setProxyDate($proxyDate)
+    public function setProxyDate(DateTime $proxyDate): User
     {
         $this->proxyDate = $proxyDate;
 
@@ -262,9 +298,9 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Get proxyDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getProxyDate()
+    public function getProxyDate(): DateTime
     {
         return $this->proxyDate;
     }
@@ -276,7 +312,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return User
      */
-    public function setProxyNum($proxyNum)
+    public function setProxyNum(string $proxyNum): User
     {
         $this->proxyNum = $proxyNum;
 
@@ -288,7 +324,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return string
      */
-    public function getProxyNum()
+    public function getProxyNum(): string
     {
         return $this->proxyNum;
     }
@@ -300,7 +336,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return User
      */
-    public function setPassport($passport)
+    public function setPassport(string $passport): User
     {
         $this->passport = $passport;
 
@@ -312,7 +348,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return string
      */
-    public function getPassport()
+    public function getPassport(): string
     {
         return $this->passport;
     }
@@ -324,7 +360,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return User
      */
-    public function setSort($sort)
+    public function setSort($sort): User
     {
         $this->sort = $sort;
 
@@ -336,7 +372,7 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return integer
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
@@ -345,11 +381,11 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Add viewedNotice
      *
-     * @param \App\Entity\Notice $viewedNotice
+     * @param Notice $viewedNotice
      *
      * @return User
      */
-    public function addViewedNotice(\App\Entity\Notice $viewedNotice)
+    public function addViewedNotice(Notice $viewedNotice): User
     {
         $this->viewedNotices[] = $viewedNotice;
 
@@ -359,9 +395,9 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Remove viewedNotice
      *
-     * @param \App\Entity\Notice $viewedNotice
+     * @param Notice $viewedNotice
      */
-    public function removeViewedNotice(\App\Entity\Notice $viewedNotice)
+    public function removeViewedNotice(Notice $viewedNotice)
     {
         $this->viewedNotices->removeElement($viewedNotice);
     }
@@ -369,9 +405,9 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Get viewedNotices
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
-    public function getViewedNotices()
+    public function getViewedNotices(): Collection
     {
         return $this->viewedNotices;
     }
@@ -379,11 +415,11 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Add viewedClient
      *
-     * @param \App\Entity\ViewedClient $viewedClient
+     * @param ViewedClient $viewedClient
      *
      * @return User
      */
-    public function addViewedClient(\App\Entity\ViewedClient $viewedClient)
+    public function addViewedClient(ViewedClient $viewedClient): User
     {
         $this->viewedClients[] = $viewedClient;
 
@@ -393,9 +429,9 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Remove viewedClient
      *
-     * @param \App\Entity\ViewedClient $viewedClient
+     * @param ViewedClient $viewedClient
      */
-    public function removeViewedClient(\App\Entity\ViewedClient $viewedClient)
+    public function removeViewedClient(ViewedClient $viewedClient)
     {
         $this->viewedClients->removeElement($viewedClient);
     }
@@ -403,14 +439,14 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Get viewedClients
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getViewedClients()
     {
         return $this->viewedClients;
     }
 
-    public function isGranted($role)
+    public function isGranted($role): bool
     {
         return in_array($role, $this->getRoles());
     }
@@ -418,9 +454,9 @@ class User extends BaseUser implements BaseEntityInterface
     /**
      * Get positionText
      *
-     * @return mixed
+     * @return string
      */
-    public function getPositionText()
+    public function getPositionText(): string
     {
         return $this->positionText;
     }
@@ -432,10 +468,15 @@ class User extends BaseUser implements BaseEntityInterface
      *
      * @return User
      */
-    public function setPositionText($positionText)
+    public function setPositionText($positionText): User
     {
         $this->positionText = $positionText;
 
         return $this;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 }

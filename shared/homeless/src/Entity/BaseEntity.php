@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Sonata\UserBundle\Entity\User;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 abstract class BaseEntity implements BaseEntityInterface
@@ -34,7 +34,7 @@ abstract class BaseEntity implements BaseEntityInterface
 
     /**
      * Кем создано
-     * @ORM\ManyToOne(targetEntity="App\Sonata\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     protected $createdBy;
 
@@ -46,7 +46,7 @@ abstract class BaseEntity implements BaseEntityInterface
 
     /**
      * Кем изменено
-     * @ORM\ManyToOne(targetEntity="App\Sonata\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     protected $updatedBy;
 

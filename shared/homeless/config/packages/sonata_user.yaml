@@ -2,8 +2,8 @@ sonata_user:
   security_acl: false
   manager_type: orm # can be orm or mongodb
   class:
-    user: App\Sonata\UserBundle\Entity\User
-    group: App\Sonata\UserBundle\Entity\Group
+    user: App\Entity\User
+    group: App\Entity\Group
   #    profile:
   #        menu:
   #            - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}

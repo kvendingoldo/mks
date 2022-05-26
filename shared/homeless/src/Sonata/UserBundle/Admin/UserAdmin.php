@@ -4,7 +4,7 @@ namespace App\Sonata\UserBundle\Admin;
 
 use App\Admin\BaseAdminTrait;
 use App\Entity\Position;
-use App\Sonata\UserBundle\Entity\User;
+use App\Entity\User;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;

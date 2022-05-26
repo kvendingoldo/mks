@@ -6,7 +6,7 @@ use App\Entity\Certificate;
 use App\Entity\CertificateType;
 use App\Entity\Client;
 use App\Entity\Contract;
-use App\Sonata\UserBundle\Entity\User;
+use App\Entity\User;
 use App\Entity\GeneratedDocument;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\EngineInterface;

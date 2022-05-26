@@ -658,7 +658,7 @@ class ClientAdmin extends BaseAdmin
                     'callback' => [$this, 'getContractCreatedByFilter'],
                     'field_type' => 'entity',
                     'field_options' => [
-                        'class' => 'App\Sonata\UserBundle\Entity\User',
+                        'class' => 'App\Entity\User',
                         'choice_label' => 'fullname',
                         'multiple' => false,
                         'query_builder' => function (EntityRepository $er) {

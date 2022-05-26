@@ -3,7 +3,7 @@
 namespace App\Admin;
 
 use App\Entity\Notice;
-use App\Sonata\UserBundle\Entity\User;
+use App\Entity\User;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
